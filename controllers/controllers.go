@@ -10,7 +10,6 @@ import (
 
 func GetAllStudents(c *gin.Context) {
 	c.Header("Content-Type", "text/json")
-	// TODO - FIX THIS ROUTE
 	var students []models.Student
 	database.DB.Find(&students)
 	c.JSON(200, students)
@@ -29,9 +28,9 @@ func RegisterNewStudent(c *gin.Context) {
 
 }
 
-// func FilterStudentsById(c *gin.Context) {
-// 	id := c.Params.ByName("id")
-// 	c.JSON(200, gin.H{
-
-// 	})
-// }
+func FindStudentById(c *gin.Context) {
+	var aluno models.Student
+	id := c.Params.ByName("id")
+	database.DB.First(&aluno, id)
+	c.JSON(http.StatusOK, aluno)
+}
