@@ -32,5 +32,13 @@ func FindStudentById(c *gin.Context) {
 	var aluno models.Student
 	id := c.Params.ByName("id")
 	database.DB.First(&aluno, id)
+
+	if aluno.ID == 0 {
+		c.JSON(http.StatusNotFound, gin.H{
+			"Not found": "Could not find a student with this id in the database",
+		})
+		return
+	}
+
 	c.JSON(http.StatusOK, aluno)
 }
