@@ -11,7 +11,9 @@ import (
 func GetAllStudents(c *gin.Context) {
 	c.Header("Content-Type", "text/json")
 	// TODO - FIX THIS ROUTE
-	c.JSON(200, models.Students)
+	var students []models.Student
+	database.DB.Find(&students)
+	c.JSON(200, students)
 }
 
 func RegisterNewStudent(c *gin.Context) {
