@@ -42,3 +42,10 @@ func FindStudentById(c *gin.Context) {
 
 	c.JSON(http.StatusOK, aluno)
 }
+
+func DeleteStudent(c *gin.Context) {
+	var aluno models.Student
+	id := c.Params.ByName("id")
+	database.DB.Delete(&aluno, id)
+	c.JSON(http.StatusOK, aluno)
+}
